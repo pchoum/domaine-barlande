@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Domaine de la Barlande – Habitat participatif & Permaculture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --vert:    #4A6741;
+      --vert-clair: #6B8F61;
+      --ocre:    #C8923A;
+      --brun:    #3D2B1F;
+      --creme:   #F5F0E8;
+      --blanc:   #FDFAF4;
+      --gris:    #7A7066;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--blanc);
+      color: var(--brun);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(253,250,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(61,43,31,0.08);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--vert);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--ocre); }
+    nav ul { list-style: none; display: flex; gap: 2.2rem; }
+    nav ul a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brun);
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--vert); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 7rem 3rem 5rem;
+      background-color: var(--creme);
+      background-image:
+        radial-gradient(ellipse at 20% 80%, rgba(74,103,65,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,146,58,0.10) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ocre);
+      font-weight: 600;
+      margin-bottom: 1.6rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 1.05;
+      max-width: 14ch;
+      color: var(--brun);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--vert);
+    }
+    .hero-title .accent { color: var(--ocre); }
+    .hero-sub {
+      margin-top: 2rem;
+      max-width: 48ch;
+      color: var(--gris);
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+    .hero-ctas {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--vert); color: var(--blanc); }
+    .btn-primary:hover { background: var(--brun); }
+    .btn-outline {
+      background: transparent;
+      color: var(--brun);
+      border: 1.5px solid var(--brun);
+    }
+    .btn-outline:hover { background: var(--brun); color: var(--blanc); }
+
+    /* petits cercles décoratifs */
+    .hero-deco {
+      position: absolute; right: 6vw; bottom: 8vh;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(74,103,65,0.18);
+      pointer-events: none;
+    }
+    .hero-deco::after {
+      content: '';
+      position: absolute; inset: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,146,58,0.2);
+    }
+    .leaf {
+      position: absolute; right: calc(6vw + 90px); bottom: calc(8vh + 90px);
+      font-size: 4.5rem; opacity: 0.18; pointer-events: none;
+      transform: rotate(-15deg);
+    }
+
+    /* ── SECTIONS communes ── */
+    section { padding: 6rem 3rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ocre);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      color: var(--brun);
+      max-width: 22ch;
+    }
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--ocre);
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    /* ── PROJET ── */
+    #projet { background: var(--blanc); }
+    .projet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3.5rem;
+    }
+    .projet-text p { color: var(--gris); margin-bottom: 1.2rem; }
+    .valeurs {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .valeur-item {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.4rem;
+      background: var(--creme);
+      border-left: 3px solid var(--vert);
+    }
+    .valeur-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .valeur-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--brun);
+      margin-bottom: 0.2rem;
+    }
+    .valeur-desc { font-size: 0.92rem; color: var(--gris); line-height: 1.5; }
+
+    /* ── LE LIEU ── */
+    #lieu { background: var(--creme); }
+    .lieu-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+    .lieu-text p { color: var(--gris); margin-bottom: 1.1rem; }
+    .lieu-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(61,43,31,0.1);
+      border: 1px solid rgba(61,43,31,0.1);
+      margin-bottom: 2rem;
+    }
+    .lieu-stat {
+      background: var(--blanc);
+      padding: 1.3rem 1.2rem;
+    }
+    .lieu-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--vert);
+      line-height: 1;
+    }
+    .lieu-stat-label {
+      font-size: 0.78rem;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.4rem;
+    }
+    .lieu-block {
+      background: var(--blanc);
+      border: 1px solid rgba(61,43,31,0.08);
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .lieu-block h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--brun);
+      margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .lieu-block p { font-size: 0.92rem; color: var(--gris); line-height: 1.6; margin: 0; }
+    .lieu-block ul { list-style: none; font-size: 0.92rem; color: var(--gris); line-height: 1.9; }
+    .lieu-block ul li::before { content: "· "; color: var(--ocre); font-weight: 700; }
+    .lieu-block a { color: var(--vert); }
+
+    /* ── GALERIE ── */
+    #galerie { background: var(--creme); }
+    .galerie-grid {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .galerie-item {
+      aspect-ratio: 4/3;
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--vert-clair);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .galerie-item:nth-child(1) { grid-column: span 2; aspect-ratio: 16/9; }
+    .galerie-item svg { width: 64px; opacity: 0.25; }
+    .galerie-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      gap: 0.5rem;
+    }
+    .galerie-item:nth-child(1) { background: #5C7A52; }
+    .galerie-item:nth-child(2) { background: #8A6A45; }
+    .galerie-item:nth-child(3) { background: #4A6741; }
+    .galerie-item:nth-child(4) { background: #7A5C38; }
+    .galerie-item:nth-child(5) { background: #6B5A3E; }
+    .galerie-note {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--gris);
+      font-style: italic;
+    }
+
+    /* ── ÉQUIPE ── */
+    #equipe { background: var(--blanc); }
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .equipe-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .membre {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(61,43,31,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .membre:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(61,43,31,0.08); }
+    .avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      background: var(--creme);
+      border: 2px solid var(--vert);
+    }
+    .membre-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--brun);
+      margin-bottom: 0.3rem;
+    }
+    .membre-role {
+      font-size: 0.8rem;
+      color: var(--ocre);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .membre-bio { font-size: 0.9rem; color: var(--gris); line-height: 1.5; }
+
+    /* ── REJOINDRE ── */
+    #rejoindre {
+      background: var(--vert);
+      color: var(--blanc);
+    }
+    #rejoindre .section-title { color: var(--blanc); max-width: 30ch; }
+    #rejoindre .section-label { color: rgba(253,250,244,0.6); }
+    .rejoindre-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .rejoindre-text p { color: rgba(253,250,244,0.8); margin-bottom: 1.2rem; }
+    .rejoindre-steps {
+      display: flex; flex-direction: column; gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .step {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--ocre);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 2.5rem;
+    }
+    .step-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--blanc);
+      margin-bottom: 0.3rem;
+    }
+    .step-content p { font-size: 0.9rem; color: rgba(253,250,244,0.7); }
+    .rejoindre-form {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 2.5rem;
+    }
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--blanc);
+      margin-bottom: 1.5rem;
+    }
+    .field { margin-bottom: 1.2rem; }
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(253,250,244,0.6);
+      margin-bottom: 0.4rem;
+    }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--blanc);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 2px;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .field input:focus, .field textarea:focus { border-color: var(--ocre); }
+    .field textarea { height: 100px; resize: vertical; }
+    .field select option { background: var(--brun); }
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--ocre);
+      color: var(--blanc);
+      border: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-radius: 2px;
+    }
+    .btn-submit:hover { background: #A87530; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--creme); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+    .contact-info p { color: var(--gris); margin-bottom: 2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: center;
+    }
+    .contact-icon {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--vert);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item-text { font-size: 0.95rem; color: var(--brun); }
+    .contact-item-text strong { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gris); margin-bottom: 0.1rem; }
+    .contact-form { background: var(--blanc); padding: 2.5rem; border: 1px solid rgba(61,43,31,0.08); }
+    .contact-form .field label { color: var(--gris); }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--creme);
+      border: 1px solid rgba(61,43,31,0.15);
+      color: var(--brun);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--vert); }
+    .contact-form textarea { height: 120px; resize: vertical; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--gris); opacity: 0.5; }
+    .btn-contact {
+      padding: 0.85rem 2rem;
+      background: var(--brun);
+      color: var(--blanc);
+      border: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-radius: 2px;
+    }
+    .btn-contact:hover { background: var(--vert); }
+
+    /* ── ACTIVITÉS ── */
+    #activites { background: var(--blanc); }
+    .activites-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .activite-card {
+      padding: 2rem 1.6rem;
+      background: var(--creme);
+      border-top: 3px solid var(--vert);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .activite-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(61,43,31,0.08); }
+    .activite-card.ocre { border-top-color: var(--ocre); }
+    .activite-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .activite-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--brun);
+      margin-bottom: 0.5rem;
+    }
+    .activite-desc { font-size: 0.9rem; color: var(--gris); line-height: 1.55; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brun);
+      color: rgba(253,250,244,0.6);
+      padding: 3rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--blanc);
+      margin-bottom: 0.5rem;
+    }
+    .footer-logo span { color: var(--ocre); }
+    footer p { font-size: 0.85rem; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 2rem;
+      margin: 1.5rem 0;
+    }
+    .footer-links a {
+      color: rgba(253,250,244,0.5);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--ocre); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      nav ul a { font-size: 0.75rem; }
+      section { padding: 4rem 1.5rem; }
+      .projet-grid, .equipe-grid, .rejoindre-inner, .contact-grid, .lieu-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .lieu-stats { grid-template-columns: 1fr 1fr; }
+      .galerie-grid { grid-template-columns: 1fr 1fr; }
+      .activites-grid { grid-template-columns: 1fr; }
+      .galerie-item:nth-child(1) { grid-column: span 2; }
+      .hero-deco, .leaf { display: none; }
+      nav ul { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Domaine de la <span>Barlande</span></a>
+  <ul>
+    <li><a href="#projet">Le projet</a></li>
+    <li><a href="#lieu">Le lieu</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#activites">Activités</a></li>
+    <li><a href="#equipe">L'équipe</a></li>
+    <li><a href="#rejoindre">Nous rejoindre</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Habitat participatif · Permaculture · Lien au vivant</div>
+  <h1 class="hero-title">
+    Vivre <em>ensemble</em>,<br>
+    cultiver <span class="accent">autrement.</span>
+  </h1>
+  <p class="hero-sub">
+    Le Domaine de la Barlande est un projet d'éco-habitat partagé fondé sur les principes de la permaculture, la gouvernance collective et le respect des écosystèmes.
+  </p>
+  <div class="hero-ctas">
+    <a href="#projet" class="btn btn-primary">Découvrir le projet</a>
+    <a href="#rejoindre" class="btn btn-outline">Nous rejoindre</a>
+  </div>
+  <div class="hero-deco"></div>
+  <div class="leaf">🌿</div>
+</section>
+
+<!-- PROJET -->
+<section id="projet">
+  <div class="section-inner">
+    <div class="section-label">Notre vision</div>
+    <h2 class="section-title">Un domaine où la nature et l'humain se co-construisent</h2>
+    <div class="divider"></div>
+    <div class="projet-grid">
+      <div class="projet-text">
+        <p>
+          Né d'une envie commune de sortir des logiques individualistes, le Domaine de la Barlande réunit des familles et des individus autour d'un hameau partagé, de jardins vivriers et d'un mode de vie fondé sur l'entraide et la sobriété choisie.
+        </p>
+        <p>
+          Notre approche s'inspire des principes de la permaculture : observer avant d'agir, travailler avec les cycles naturels, valoriser la diversité. Chaque décision — architecturale, agricole, sociale — est prise en commun, dans un cadre de gouvernance horizontale.
+        </p>
+        <p>
+          Acheté en 2023, le hameau de la Barlande s'étend sur 25 hectares au cœur du Parc naturel régional du Livradois-Forez, dans le Puy-de-Dôme. Une première zone de démonstration en permaculture est déjà en place, les premiers arbres ont été plantés, et la rénovation écologique des bâtiments est en cours. Rejoignez-nous pour façonner cet espace de vie ensemble.
+        </p>
+        <a href="#rejoindre" class="btn btn-primary" style="margin-top:1rem">Participer au projet</a>
+      </div>
+      <div class="valeurs">
+        <div class="valeur-item">
+          <div class="valeur-icon">🌱</div>
+          <div>
+            <div class="valeur-title">Agriculture régénérative</div>
+            <div class="valeur-desc">Jardins vivriers en permaculture, forêt-jardin, semences paysannes et compostage collectif.</div>
+          </div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-icon">🏡</div>
+          <div>
+            <div class="valeur-title">Habitat partagé</div>
+            <div class="valeur-desc">Logements individuels autonomes et espaces communs — cuisine, salle de réunion, atelier, bibliothèque.</div>
+          </div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-icon">🤝</div>
+          <div>
+            <div class="valeur-title">Gouvernance horizontale</div>
+            <div class="valeur-desc">Décisions par consentement, rôles tournants et transparence financière totale.</div>
+          </div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-icon">☀️</div>
+          <div>
+            <div class="valeur-title">Autonomie énergétique</div>
+            <div class="valeur-desc">Panneaux solaires, récupération des eaux de pluie, isolation biologique et chauffage passif.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LE LIEU -->
+<section id="lieu">
+  <div class="section-inner">
+    <div class="section-label">Le territoire</div>
+    <h2 class="section-title">Le hameau de la Barlande, au cœur du Livradois-Forez</h2>
+    <div class="divider"></div>
+    <div class="lieu-grid">
+      <div class="lieu-text">
+        <p>
+          Acheté en 2023, le hameau de la Barlande se situe dans le village du Brugeron, en zone de montagne à plus de 1 000 mètres d'altitude, dans les Monts du Forez (Puy-de-Dôme). La SCI possède 25 hectares, partagés entre prairies permanentes, zones forestières et zones humides, traversés par deux sources qui alimentent le ruisseau de Gérize.
+        </p>
+        <p>
+          Le territoire est riche d'une biodiversité remarquable : la commune jouxte à l'est une zone naturelle d'intérêt écologique (ZNIEFF) et, au sud-est, un site Natura 2000 abritant prairies humides et tourbières préservées. Le SAGE de la Dore y mène un travail de protection de ces milieux, essentiels à la filtration de l'eau et au stockage du carbone.
+        </p>
+        <p>
+          Le climat, océanique à été tempéré, offre des étés doux (26°C en moyenne en août) et des hivers frais, avec environ 1 160 mm de pluie par an — un terrain propice à une agriculture régénérative diversifiée.
+        </p>
+        <p>
+          Les bâtiments comptent une grange et plusieurs habitations, dont quatre sont aujourd'hui vides et viendront accueillir le projet collectif. Le hameau est desservi par un chemin communal ; les premières habitations voisines sont à 400 m, et le bourg du Brugeron à 800 m.
+        </p>
+      </div>
+      <div>
+        <div class="lieu-stats">
+          <div class="lieu-stat">
+            <div class="lieu-stat-num">25 ha</div>
+            <div class="lieu-stat-label">Prairies, forêts & zones humides</div>
+          </div>
+          <div class="lieu-stat">
+            <div class="lieu-stat-num">2023</div>
+            <div class="lieu-stat-label">Année d'acquisition</div>
+          </div>
+          <div class="lieu-stat">
+            <div class="lieu-stat-num">1000m+</div>
+            <div class="lieu-stat-label">Altitude (zone de montagne)</div>
+          </div>
+          <div class="lieu-stat">
+            <div class="lieu-stat-num">243</div>
+            <div class="lieu-stat-label">Habitants au Brugeron (2021)</div>
+          </div>
+        </div>
+        <div class="lieu-block">
+          <h4>📍 Accès & alentours</h4>
+          <ul>
+            <li>Ambert — 25 km, 30 min</li>
+            <li>Thiers — 36 km, 40 min</li>
+            <li>Clermont-Ferrand — 65 km, 1h</li>
+            <li>Courpière & Cunlhat — villages "Petites villes de demain"</li>
+          </ul>
+        </div>
+        <div class="lieu-block">
+          <h4>🧀 Terroir local</h4>
+          <p>Fourme de Montbrison et d'Ambert (AOP), volailles du Forez (IGP, label rouge), ail rose de Billom, marc d'Auvergne, et la pomme d'Auvergne dont le <a href="https://cen-auvergne.fr/sites-et-milieux-naturels/verger-conservatoire-de-tours" target="_blank" rel="noopener">verger conservatoire de Tours-sur-Meymont</a> se trouve à 25 min.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="section-inner">
+    <div class="section-label">Images & inspirations</div>
+    <h2 class="section-title">Un aperçu de ce que nous construisons</h2>
+    <div class="divider"></div>
+    <div class="galerie-grid">
+      <div class="galerie-item">
+        <div class="galerie-placeholder">
+          <span style="font-size:2.5rem">🌾</span>
+          <span>Terrain & paysage</span>
+        </div>
+      </div>
+      <div class="galerie-item">
+        <div class="galerie-placeholder">
+          <span style="font-size:2.5rem">🌿</span>
+          <span>Forêt-jardin</span>
+        </div>
+      </div>
+      <div class="galerie-item">
+        <div class="galerie-placeholder">
+          <span style="font-size:2.5rem">🏡</span>
+          <span>Habitat</span>
+        </div>
+      </div>
+      <div class="galerie-item">
+        <div class="galerie-placeholder">
+          <span style="font-size:2.5rem">🤲</span>
+          <span>Chantiers participatifs</span>
+        </div>
+      </div>
+      <div class="galerie-item">
+        <div class="galerie-placeholder">
+          <span style="font-size:2.5rem">🌻</span>
+          <span>Jardin vivrier</span>
+        </div>
+      </div>
+    </div>
+    <p class="galerie-note">📸 Les photos seront ajoutées au fur et à mesure de l'avancement du projet.</p>
+  </div>
+</section>
+
+<!-- ACTIVITÉS -->
+<section id="activites">
+  <div class="section-inner">
+    <div class="section-label">Aux alentours</div>
+    <h2 class="section-title">Un terrain de jeu grandeur nature</h2>
+    <div class="divider"></div>
+    <div class="activites-grid">
+      <div class="activite-card">
+        <span class="activite-icon">🥾</span>
+        <div class="activite-title">Randonnée</div>
+        <div class="activite-desc">Des centaines de kilomètres de sentiers balisés dans les Monts du Forez, dont la montée mythique au Puy Gros (16 km, 600 m de dénivelé) au départ du Brugeron.</div>
+      </div>
+      <div class="activite-card ocre">
+        <span class="activite-icon">🚵</span>
+        <div class="activite-title">VTT</div>
+        <div class="activite-desc">Le Brugeron est traversé par le Tour du Livradois-Forez (223 km) et se trouve sur l'un des plus grands espaces VTT FFC de France, reliant Vichy, Roanne, Thiers et Ambert.</div>
+      </div>
+      <div class="activite-card">
+        <span class="activite-icon">🪂</span>
+        <div class="activite-title">Parapente</div>
+        <div class="activite-desc">Les crêtes du Forez et les Hautes-Chaumes offrent des sites de décollage réputés, avec des vues qui s'étendent jusqu'à la chaîne des Puys par beau temps.</div>
+      </div>
+      <div class="activite-card ocre">
+        <span class="activite-icon">🏊</span>
+        <div class="activite-title">Baignade au lac d'Aubusson</div>
+        <div class="activite-desc">Une plage surveillée en été, des activités nautiques et un cadre boisé pour se rafraîchir à quelques minutes du hameau.</div>
+      </div>
+      <div class="activite-card">
+        <span class="activite-icon">🧀</span>
+        <div class="activite-title">Maison de la Fourme d'Ambert</div>
+        <div class="activite-desc">À Ambert, découvrez les secrets de fabrication de la Fourme AOP et dégustez ce fromage persillé emblématique du Forez, le plus doux des bleus.</div>
+      </div>
+      <div class="activite-card ocre">
+        <span class="activite-icon">🚂</span>
+        <div class="activite-title">Vélorail d'Ambert</div>
+        <div class="activite-desc">Un parcours panoramique en famille le long de la Dore, à pédaler à travers ponts et viaducs au cœur d'un paysage verdoyant.</div>
+      </div>
+      <div class="activite-card">
+        <span class="activite-icon">❄️</span>
+        <div class="activite-title">Ski de fond & raquettes</div>
+        <div class="activite-desc">L'hiver venu, le Col du Béal et les Hautes-Chaumes du Forez se transforment en domaine nordique pour le ski de fond et les balades en raquettes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÉQUIPE -->
+<section id="equipe">
+  <div class="section-inner">
+    <div class="section-label">Les personnes</div>
+    <h2 class="section-title">Le groupe fondateur</h2>
+    <div class="divider"></div>
+    <div class="equipe-grid">
+      <div class="membre">
+        <div class="avatar">🏡</div>
+        <div class="membre-name">Virginie D.</div>
+        <div class="membre-role">Habitat participatif</div>
+        <div class="membre-bio">Ingénieure de gestion de formation, Virginie pilote la dimension habitat participatif du projet.</div>
+      </div>
+      <div class="membre">
+        <div class="avatar">🌾</div>
+        <div class="membre-name">Przem G.</div>
+        <div class="membre-role">Agriculture régénérative</div>
+        <div class="membre-bio">Ingénieur de gestion en reconversion vers l'agriculture régénérative, Przem assiste également la rénovation des bâtiments.</div>
+      </div>
+      <div class="membre">
+        <div class="avatar">🔨</div>
+        <div class="membre-name">Piotr G.</div>
+        <div class="membre-role">Rénovation écologique</div>
+        <div class="membre-bio">En charge de la rénovation écologique des bâtiments du domaine.</div>
+      </div>
+      <div class="membre">
+        <div class="avatar">🤝</div>
+        <div class="membre-name">Circé U.</div>
+        <div class="membre-role">Réseau & administratif</div>
+        <div class="membre-bio">Responsable d'associations locales et de la mise en relation, Circé assure le suivi administratif du projet.</div>
+      </div>
+      <div class="membre">
+        <div class="avatar">🌱</div>
+        <div class="membre-name">Garry U.</div>
+        <div class="membre-role">Permaculture</div>
+        <div class="membre-bio">Formateur en permaculture, Garry a déjà mis en place une première zone de démonstration et planté les premiers arbres.</div>
+      </div>
+    </div>
+    <p style="margin-top:2rem; color:var(--gris); font-style:italic; font-size:0.95rem;">
+      Le groupe s'agrandit — votre place est peut-être ici. <a href="#rejoindre" style="color:var(--vert); font-weight:600;">Rejoignez-nous →</a>
+    </p>
+  </div>
+</section>
+
+<!-- REJOINDRE -->
+<section id="rejoindre">
+  <div class="section-inner">
+    <div class="section-label">Nous rejoindre</div>
+    <div class="rejoindre-inner">
+      <div>
+        <h2 class="section-title">Vous vous reconnaissez dans ce projet ?</h2>
+        <div class="divider" style="background:var(--ocre)"></div>
+        <div class="rejoindre-text">
+          <p>Nous cherchons des personnes motivées, ouvertes au dialogue et prêtes à s'investir dans la durée. Pas besoin d'être expert·e — l'envie de vivre autrement est le point de départ.</p>
+        </div>
+        <div class="rejoindre-steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Prenez contact</h4>
+              <p>Remplissez le formulaire pour vous présenter et exprimer votre intérêt.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Rencontre informelle</h4>
+              <p>On organise une visio ou une rencontre pour mieux se connaître.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Intégration au groupe</h4>
+              <p>Participation aux réunions, aux chantiers et à la co-construction du projet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rejoindre-form">
+        <div class="form-title">Rejoindre l'aventure</div>
+        <div class="field">
+          <label>Votre prénom & nom</label>
+          <input type="text" placeholder="Marie Dupont" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="marie@exemple.be" />
+        </div>
+        <div class="field">
+          <label>Votre situation</label>
+          <select>
+            <option value="">Choisir…</option>
+            <option>Personne seule</option>
+            <option>Couple sans enfant</option>
+            <option>Famille avec enfant(s)</option>
+            <option>Colocataires</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Pourquoi ce projet vous attire ?</label>
+          <textarea placeholder="Quelques mots sur votre parcours et vos motivations…"></textarea>
+        </div>
+        <button class="btn-submit">Envoyer ma candidature</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Une question ? Écrivez-nous</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Vous êtes curieux·se, journaliste, chercheur·se, ou simplement souhaitez en savoir plus ? N'hésitez pas à nous écrire.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              contact@domainebarlande.be
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Localisation</strong>
+              Belgique — région à confirmer
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📅</div>
+            <div class="contact-item-text">
+              <strong>Réunions ouvertes</strong>
+              Dernier dimanche du mois
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="field">
+          <label>Nom</label>
+          <input type="text" placeholder="Votre nom" />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="votre@email.be" />
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea placeholder="Votre message…"></textarea>
+        </div>
+        <button class="btn-contact">Envoyer le message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Domaine de la <span>Barlande</span></div>
+  <p>Habitat participatif · Permaculture · Belgique</p>
+  <div class="footer-links">
+    <a href="#projet">Le projet</a>
+    <a href="#equipe">L'équipe</a>
+    <a href="#rejoindre">Nous rejoindre</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p style="font-size:0.78rem; opacity:0.4; margin-top:1rem;">© 2025 Domaine de la Barlande — Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
